@@ -1,0 +1,53 @@
+1. "docker version" komutu çalıştırıldığında (terminalden), gelen ekranda Client ve Server bilgileri bulunmaktadır.
+   Windows ve Mac sistemler üzerine docker kurduğumuz zaman, docker arkada küçük bir linux yüklü sanal makineyi ayağa kaldırıp,
+   "docker daemon" 'ı bunun içine yüklemektedir.
+2. Client 'ı ise direkt bulunduğu işletim sisteminin üzerine yüklemektedir. Server ve Client ın konuşabileceği şekilde ayarlamaları da yapmaktadır.
+3. Docker Daemon nedir? Docker daemon, Docker platformunun çekirdeğini oluşturan bir süreçtir ve Docker ile ilgili tüm temel işlevleri yöneten bir arka plan hizmetidir.
+4. Bu komut ile : "docker container run hello-world" docker bir container oluşturacak ve bu container'ı çalıştıracak (hello-world imajından bir container oluşturmuştur.)
+5. "docker image --help" yazdığınızda bir docker image'ının nasıl oluşturulacağının bilgileri terminalde gösterilmektedir.
+6. "docker image rm --help" yazdığınızda silme işlemi ile ilgili kullanılabilecek komutları getirmektedir. Yani her aşamada yardım etmektedir.
+7. "docker container create" ile yeni bir container oluşturulur.
+8. "docker container start" ile bu oluşturulan container çalıştırılır.
+9. "docker container run" ile container oluşturulup çalıştırılır.
+10. "docker container run --name ilkcontainer omeraltan/app1" bu komut ile bu container'a isim vererek omeraltan/app1 imajından bir container ayağa kaldırılmaktadır.
+11. Her "docker daemon" ilk kurulduğu zaman "docker hub" ile konuşacak şekilde ayarlanmıştır.
+12. "docker container ls" komutu ile çalışan container ları görebiliriz.
+13. "docker container ls -a" komutu ile sistemde bulunan durdurulmuş containerları da görebiliriz.
+
+
+
+Sorular
+1: Öncelikle sistemdeki tüm container, image ve volumeleri görelim. Bunun için ayrı ayrı listeleme komutlarını girelim. Ve ardından temizlik yapmak adına makinenizdeki tüm containerları, imageleri ve volumeleri temizleyelim. Bunun iki yöntemi var. Bakalım siz kolay olanı mı seçeceksiniz.
+
+2: centos, alpine, nginx, httpd:alpine, ozgurozturknet/adanzyedocker, ozgurozturknet/hello-app, ozgurozturknet/app1 isimli imajları çalıştığımız sisteme çekelim.
+
+3: ozgurozturknet/app1 isimli imajdan bir container yaratalım.
+
+4: httpd:alpine isimli imajdan detached bir container yaratalım. Yarattığımız container ismini ve id’sini görelim.
+
+5: Yarattığımız bu contaier’ın loglarına bakalım.
+
+6: Container’ı durduralım, ardından yeniden çalıştıralım ve son olarak container’ı sistemden kaldıralım.
+
+7: ozgurozturknet/adanzyedocker isimli imajdan websunucu adında detached ve “-p 80:80” ile portu publish edilmiş bir container yaratalım. Kendi bilgisayarımızın browserından bu web sitesine erişelim.
+
+8: websunucu adlı bu container’ın içerisine bağlanalım. /usr/local/apache2/htdocs klasörünün altına geçelim ve echo “denemedir” >> index.html komutuyla buradaki dosyaya denemedir yazısını ekleyelim. Web tarayıcıya geçerek dosyaya ekleme yapabildiğimizi görmek için refresh edelim. Sonrasında container içerisinden exit ile çıkalım.
+
+9: websunucu isimli container’ı çalışırken silelim.
+
+10: alpine isimli imajdan bir container yaratalım. Ama varsayılan olarak çalışması gereken uygulama yerine “ls” uygulamasının çalışmasını sağlayalım.
+
+11: “alistirma1” isimli bir volüme yaratalım.
+
+12: alpine isimli imajdan “birinci” isimli bir container yaratalım. Bu container’ı interactive modda yaratalım ve bağlanabilelim. Aynı zamanda “alistirma1” isimli volume’u bu containerın “/test” isimli folder’ına mount edelim. Bu folder içerisine geçelim ve “touch abc.txt” komutuyla bir dosya yaratalım daha sonra “echo deneme >> abc.txt” komutuyla bu dosyanın içerisine yazı ekleyelim.
+
+13: alpine isimli imajdan “ikinci” isimli bir container yaratalım. Bu container’ı interactive modda yaratalım ve bağlanabilelim. Aynı zamanda “alistirma1” isimli volume’u bu containerın “/test” isimli folder’ına mount edelim. Bu folder içerisinde “ls” komutyla dosyaları listeleyelim ve abc.txt dosyası olduğunu görelim. “cat abc.txt” ile dosyanın içeriğini kontrol edelim.
+
+14: alpine isimli imajdan “ucuncu” isimli bir container yaratalım. Bu container’ı interactive modda yaratalım ve bağlanabilelim. Aynı zamanda “alistirma1” isimli volume’u bu containerın “/test” isimli folder’ına mount edelim fakat Read Only olarak mount edelim. Bu folder içerisine geçelim ve “touch abc1.txt” komutuyla bir dosya yaratmaya çalışalım. Ve yaratamadığımızı görelim.
+
+15: Bilgisayarımızda bir klasör yaratalım “örneğin c:\deneme” ve bu klasörün içerisinde index.html adlı bir dosya yaratıp bu dosyanın içerisine birkaç yazı ekleyelim.
+
+16: ozgurozturknet/adanzyedocker isimli imajdan websunucu1 adında detached ve “-p 80:80” ile portu publish edilmiş bir container yaratalım. Bilgisayarımızda yarattığımız klasörü container’ın içerisindeki /usr/local/apache2/htdocs klasörüne mount edelim. Web browser açarak 127.0.0.1’e gidelim ve sitemizi görelim. Daha sonra bilgisayarımızda yarattığımız klasörün içerisindeki index.html dosyasını edit edelim ve yeni yazılar ekleyelim. Web sayfasını refresh ederek bunların geldiğini görelim.
+
+17: Tüm çalışan container’ları silelim.
+
