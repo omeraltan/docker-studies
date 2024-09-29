@@ -43,6 +43,7 @@ Sorular
     docker ps -a                                                ->          Çalışıp çalışmayan bütün container lar listeleniyor.
 
 5: Yarattığımız bu contaier’ın loglarına bakalım.
+    docker logs my_httpd_container              ->          oluşturduğumuz my_httpd_container ın loglarına bakma.
 
 6: Container’ı durduralım, ardından yeniden çalıştıralım ve son olarak container’ı sistemden kaldıralım.
 
