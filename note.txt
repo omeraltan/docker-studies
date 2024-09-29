@@ -18,12 +18,29 @@
 
 Sorular
 1: Öncelikle sistemdeki tüm container, image ve volumeleri görelim. Bunun için ayrı ayrı listeleme komutlarını girelim. Ve ardından temizlik yapmak adına makinenizdeki tüm containerları, imageleri ve volumeleri temizleyelim. Bunun iki yöntemi var. Bakalım siz kolay olanı mı seçeceksiniz.
+    docker ps                   ->          Çalışan bütün  container ları listeler.
+    docker ps -a                ->          Çalışan çalışmayan bütün container ları listeler.
+    docker images               ->          Bütün image ları listeler.
+    docker volume ls            ->          Bütün volume ları listeler.
+
+    docker rm <container_id>    ->          Container çalışmıyor ise siler.
+    docker rmi <image_id>       ->          İmage i siler.
+
+    docker volume rm <volume_id>->          Volume u siler.
 
 2: centos, alpine, nginx, httpd:alpine, ozgurozturknet/adanzyedocker, ozgurozturknet/hello-app, ozgurozturknet/app1 isimli imajları çalıştığımız sisteme çekelim.
+    docker pull centos                          ->          centos imajı çekildi.
+    docker pull alpine                          ->          alpine imajı çekildi.
+    docker pull nginx                           ->          nginx  imajı çekildi.
+    docker pull ozgurozturknet/adanzyedocker    ->          adanzyedocker imajı çekildi.
+    docker pull ozgurozturknet/hello-app        ->          hello-app imajı çekildi.
 
 3: ozgurozturknet/app1 isimli imajdan bir container yaratalım.
+    docker run -d --name applicationone ozgurozturknet/app1         ->          ozgurozturknet/app1 imajından applicationone isminde bir container oluşturulur.
 
 4: httpd:alpine isimli imajdan detached bir container yaratalım. Yarattığımız container ismini ve id’sini görelim.
+    docker run -d --name my_httpd_container httpd:alpine        ->          İsmi my_httpd_container olan bir container httpd:alpine imajından oluşturulup çalıştırılıyor.
+    docker ps -a                                                ->          Çalışıp çalışmayan bütün container lar listeleniyor.
 
 5: Yarattığımız bu contaier’ın loglarına bakalım.
 
