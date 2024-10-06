@@ -1,0 +1,44 @@
+
+1. Batteries Included but Removable
+2. Volume Driver ları sizlerin volume yaratıp kullanmanızı sağlar.
+3. Docker Network Driver:
+    a. Docker bizlere ek bir protokol veya yönetmemiz gereken ek bir uygulama yönetim alt yapısı getrimeden yıllardır bildiğimiz ve kullandığımız en temel komponentlerle uyumlu çalışmasıdır.
+    b. Docker'ın sihri budur. Docker containerlar aynen birer sanal makine gibidir. Normalde bir linux sunucudan farkı yoktur.
+    c. İçine girdiğimizde normal bir sunucuda neler yapabiliyorsak o container içerisinde de onu yapabilmekteyiz.
+    d. Örneğin docker ile bir volume yaratıyoruz. Hatta o volume ü sistemim bir cloud service sağlayıcıda duruyorsa o service sağlayıcının yönetilen depolama sisteminde yaratıyorum.
+    e. Yani arkada karmaşık bir yapı çalışmaktadır. Fakat ben bu volume ü bir container a bağladığım zaman o volume ü container altında normal bir klasör olarak görüyorum.
+    f. Yada bir uygulama linux sunucuya kurulabiliyorsa eğer container içinede kurulabilir.
+    g. Docker dünyasında ağ kullanımıda bu şekildedir.
+    ğ. Bir sanal makine ağ altyapısında nasıl davranıyorsa docker container da aynı şekilde davranmaktadır.
+    h. Docker dünyasında container sistemlerin birbirleri ve dış dünya ile haberleşmesini, dış dünyadan bu container lara erişim sağlanmasını kısacası tüm erişim alt yapısını docker network objeleri ile sağlamaktayız.
+    ı. Network objeleri yaratılırken çeşitli driverlar ile yaratılmaktadır.
+    i. Bu driver lar sayesinde bı networklere değişik özellikler kazandırılmaktadır.
+4. Bridge   : Bir köprü oluşturacak docker network oluşturmak için kullanılan driver dır.
+5. Bir sisteme docker kurduğunuz zaman o makinede birdge isminde ve bridge dirver'ı kullanılarak yaratılmış bir network oluşturulur.
+6. Siz bir container yarattığınız an aksi belirtilmedikçe otomatik olarak bridge network üne bağlanır.
+7. Yeni bir docker network objesi oluşturmak isterseniz ve eğer driver belirtmezsenizde otomatik olarak birdge driver seçilir.
+8. Host     : Bazı durumlarda sistemde çalışan container ın arada herhangi bir izolasyon olmadan üztünde koştuğu hostun direkt bir parçası olmasına ihtiyaç duyarız.
+9. Bunu sağlamak için o cantainer ın üstünde çalıştığı makinenin ağ kartına amiyane tabiri ile yapışması ve arada "nat" gibi bir katman ve paket çevrimi olmaması gerekir.
+10.Buna ihtiyaç duyulduğunda kullanılması gereken dirver ın adı "host" driver dır.
+11.Host driver ı ile oluşturulmuş bir docker network objesine bağlı container ile üstünde çalıştığı sistem arasında herhangi bir network izolasyonu yoktur.
+12.Her sistemde host adında bir docker ağ objesi bulunur ve bu host driver ile yaratılmıştır.
+13.MacVlan  : Bu driver lar ile oluşturulan network objeleri sayesinde container lar fiziksel ağlara kendi mac adreslerine sahip birer fiziksel ağ adaptörüne sahipmişçesine bağlanabilirler.
+14.None     : Container hiçbir şekilde ağ bağlantısına sahip olmasın istenirse bu driver ile yaratılan network'e bağlanır.
+15.Overlay  : Ayrı hostlar üzerindeki containerların aynı ağda çalışıyormuş gibi çalışması istendiği zaman Overlay networkler devreye girer.
+16.Komutlar :
+    a. docker network ls                -> Hangi networklerin olduğunu gösterir.
+    b. docker network inspect bridge    -> Bu komut ile network objesinin tüm özellikleri listelenir (bridge).
+    c. docker container inspect <adi>   -> Bu komut ile ismini yazdığınız container ın özelliklerine erişebilirsiniz.
+
+17.Bridge   : Birden fazla ağdan tek birleşik bir ağ yaratmaya yaramaktadır. Container ın dış dünya ile haberleşmesini sağlar.
+18.Bridge   : Bridge networkü üzerinde olan diğer containerlar ile de haberleşmeyi sağlar.
+19.Host     : Üzerine bağlı olduğu sistemin network altyapısını kullanır.
+20.Port Publishing      : Container larımıza dış dünyadan paket ulaşmasını sağlıyoruz.
+21.Komutlar :
+    a. docker container run -d --publish 8080:80                -> İlgili host üzerinde bir container yarat ve bu hostun 8080 portuna gelen bütün istekleride bu yarattığın container ın 80 portuna gönder (Bu TCP protokülüdür).
+    b. docker container run -d --publish 8080:80 -p 53:53/udp   ->
+
+22. Yeni bridge nesneleri oluşturabiliriz. Aynı network e bağlı containerlar port publishing yapmadan birbirleri ile haberleşebilirler.
+23. Eğer bu durum istenmiyorsa containerlar için network izolasyonu sağlanabilir.
+24.
+
